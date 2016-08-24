@@ -5,3 +5,5 @@ from .time_adapter import TimeLogicAdapter
 from .multi_adapter import MultiLogicAdapter
 from .no_knowledge_adapter import NoKnowledgeAdapter
 from .mathematical_evaluation import MathematicalEvaluation
+from .chn_closest_match import ChnClosestMatchAdapter
+from .chn_closest_meaning import ChnClosestMeaningAdapter
