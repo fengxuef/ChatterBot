@@ -3,3 +3,4 @@ from .terminal import TerminalAdapter
 from .output_format_adapter import OutputFormatAdapter
 from .mailgun import Mailgun
 from .hipchat import HipChat
+from .WXchat import WXChat

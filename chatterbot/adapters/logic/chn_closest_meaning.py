@@ -1,6 +1,7 @@
 from .base_match import BaseMatchAdapter
 from snownlp.sim import bm25
 
+from debuglogger import logfile
 class ChnClosestMeaningAdapter(BaseMatchAdapter):
     """
     This adapter selects a response by comparing the tokenized form of the
@@ -20,6 +21,7 @@ class ChnClosestMeaningAdapter(BaseMatchAdapter):
         This is based on the total similarity between
         each word in each sentence.
         """
+        print >>logfile, string1, string2
         return bm25.BM25([string1]).simall(string2)[0]
 
     def get(self, input_statement):
@@ -59,15 +61,19 @@ class ChnClosestMeaningAdapter(BaseMatchAdapter):
 
             total_similarity += similarity
 
-            if similarity > closest_similarity:
+            if similarity < closest_similarity:
                 closest_similarity = similarity
                 closest_statement = statement
+            print >>logfile, similarity, closest_similarity, total_similarity
 
         try:
             confidence = closest_similarity / total_similarity
         except:
             confidence = 0
 
+        #raise Exception(confidence)
+        print >>logfile, confidence
+        logfile.flush()
         return confidence, next(
             (s for s in statement_list if s.text == closest_statement), None
         )
