@@ -7,7 +7,7 @@ from .trainers import Trainer
 from .utils.queues import ResponseQueue
 from .utils.module_loading import import_module
 import logging
-from utils.WXBizMsgCrypt import WXBizMsgCrypt
+# from utils.WXBizMsgCrypt import WXBizMsgCrypt
 
 import hashlib
 
@@ -17,7 +17,7 @@ class ChatBot(object):
         self.appid = appid
         self.encodingAESKey = encodingAESKey
         self.token = token
-        self.encrypto = WXBizMsgCrypt(self.token,self.encodingAESKey,self.appid)
+        # self.encrypto = WXBizMsgCrypt(self.token,self.encodingAESKey,self.appid)
         kwargs["name"] = name
 
         storage_adapter = kwargs.get("storage_adapter",
