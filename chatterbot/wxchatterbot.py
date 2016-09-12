@@ -182,6 +182,10 @@ class ChatBot(object):
             (input_statement, response, )
         )
 
+        # copy extra_data of input_statement into response
+        for k,v in input_statement.extra_data.iteritems():
+            response.add_extra_data(k,v)
+
         # Process the response output with the output adapter
         return self.output.process_response(response, **kwargs)
 

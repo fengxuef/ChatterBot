@@ -4,18 +4,19 @@ from chatterbot.utils.read_input import input_function
 resp_templ=u"""
 <xml>
     <ToUserName>
-        <![CDATA[{toUser}]]>
+        <![CDATA[{fromUser}]]>
     </ToUserName>
     <FromUserName>
-        <![CDATA[{fromUser}]]>
+        <![CDATA[{toUser}]]>
     </FromUserName>
     <CreateTime>{createTime}</CreateTime>
     <MsgType>
         <![CDATA[text]]>
     </MsgType>
-    <Content>{content}</Content>
+    <Content><![CDATA[{content}]]></Content>
 </xml>
 """
+from debuglogger import logfile
 
 class WXChat(OutputAdapter):
     """
@@ -28,4 +29,5 @@ class WXChat(OutputAdapter):
         Print the response to the user's input.
         """
         statement.add_extra_data("content", statement.text)
+        print >> logfile, statement.extra_data
         return resp_templ.format(**statement.extra_data)

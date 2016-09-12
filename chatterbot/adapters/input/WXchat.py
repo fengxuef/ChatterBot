@@ -3,6 +3,8 @@ from chatterbot.conversation import Statement
 from lxml import etree
 import time
 
+from debuglogger import logfile
+
 class WXChat(InputAdapter):
     """
     An input adapter that allows a ChatterBot instance to get
@@ -25,4 +27,5 @@ class WXChat(InputAdapter):
         statement.add_extra_data("toUser", toUser)
         statement.add_extra_data("createTime", createTime)
 
+        print >> logfile, statement.extra_data
         return statement
