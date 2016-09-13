@@ -150,6 +150,10 @@ class ChatBot(object):
         Return the bot's response based on the input.
         """
         input_statement = self.input.process_input(input_item, **kwargs)
+        # copy extra_data of input_statement into response
+        extra_data = {}
+        for k,v in input_statement.extra_data.iteritems():
+            extra_data[k] = v
         self.logger.info(u'Recieved input statement: {}'.format(input_statement.text))
 
         existing_statement = self.storage.find(input_statement.text)
@@ -183,7 +187,7 @@ class ChatBot(object):
         )
 
         # copy extra_data of input_statement into response
-        for k,v in input_statement.extra_data.iteritems():
+        for k,v in extra_data.iteritems():
             response.add_extra_data(k,v)
 
         # Process the response output with the output adapter
