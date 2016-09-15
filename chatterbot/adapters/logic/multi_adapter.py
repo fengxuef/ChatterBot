@@ -14,7 +14,7 @@ class MultiLogicAdapter(LogicAdapter):
 
         self.adapters = []
 
-    def process(self, statement):
+    def process(self, statement, **kwargs):
         """
         Returns the outout of a selection of logic adapters
         for a given input statement.
@@ -24,7 +24,7 @@ class MultiLogicAdapter(LogicAdapter):
 
         for adapter in self.adapters:
             if adapter.can_process(statement):
-                confidence, output = adapter.process(statement)
+                confidence, output = adapter.process(statement, **kwargs)
                 if confidence > max_confidence:
                     result = output
                     max_confidence = confidence

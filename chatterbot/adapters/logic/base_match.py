@@ -39,7 +39,7 @@ class BaseMatchAdapter(TieBreaking, LogicAdapter):
         """
         return self.has_storage_context and self.context.storage.count()
 
-    def process(self, input_statement):
+    def process(self, input_statement, **kwargs):
 
         # Select the closest match to the input statement
         confidence, closest_match = self.get(input_statement)

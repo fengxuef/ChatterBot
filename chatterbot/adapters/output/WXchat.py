@@ -1,6 +1,6 @@
 from chatterbot.adapters.output import OutputAdapter
 from chatterbot.utils.read_input import input_function
-
+import logging
 resp_templ=u"""
 <xml>
     <ToUserName>
@@ -16,7 +16,6 @@ resp_templ=u"""
     <Content><![CDATA[{content}]]></Content>
 </xml>
 """
-from debuglogger import logfile
 
 class WXChat(OutputAdapter):
     """
@@ -29,5 +28,5 @@ class WXChat(OutputAdapter):
         Print the response to the user's input.
         """
         statement.add_extra_data("content", statement.text)
-        print >> logfile, statement.extra_data
+        logging.debug(statement.extra_data)
         return resp_templ.format(**statement.extra_data)
